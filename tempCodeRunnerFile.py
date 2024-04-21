@@ -1,0 +1,2 @@
+
+allSprites = pygame.sprite.Group(

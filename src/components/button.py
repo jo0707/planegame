@@ -4,30 +4,36 @@ import random
 from src.components.clickable import Clickable
 
 class Button(pygame.sprite.Sprite, Clickable):
-    def __init__(self, x: int, y: int, width: int, height: int, text: str, font: pygame.font.Font, color: tuple[int, int, int], action) -> None:
+    def __init__(self, x: int, y: int, width: int, height: int, text: str, font: pygame.font.Font, textColor: tuple[int, int, int] = pygame.colordict.THECOLORS["white"], action=lambda: None) -> None:
         pygame.sprite.Sprite.__init__(self)
-        self.surf = pygame.Surface((width, height))
-        self.rect = self.surf.get_rect(topleft=(x, y))
-        self.text = font.render(text, True, color)
+        
+        # import from assets
+        self.image = pygame.image.load("assets/button.png")
+        self.image = pygame.transform.scale(self.image, (width, height))
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.text = font.render(text, True, textColor)
         # self.hoverText = font.render(text, True, hoverColor)
         self.action = action
-        self.color = color
         # self.hoverColor = hoverColor
         self.hover = False
+        #put text in the middle of the button
+        self.textRect = self.text.get_rect(center=(width // 2, height // 2))
+        self.image.blit(self.text, self.textRect)
+        
 
-    def update(self) -> None:
+    def update(self):
         if self.hover:
-            self.surf.fill(self.hoverColor)
-            self.surf.blit(self.hoverText, (0, 0))
+            self.image.fill(self.hoverColor)
+            self.image.blit(self.hoverText, (0, 0))
         else:
-            self.surf.fill(self.color)
-            self.surf.blit(self.text, (0, 0))
+            self.image.fill(self.color)
+            self.image.blit(self.text, (0, 0))
 
-    def onClick(self) -> None:
+    def onClick(self):
         self.action()
 
-    def onHover(self) -> None:
+    def onHover(self):
         self.hover = True
 
-    def onUnhover(self) -> None:
+    def onUnhover(self):
         self.hover = False

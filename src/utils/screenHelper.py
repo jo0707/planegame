@@ -3,9 +3,9 @@ import pygame
 class ScreenHelper:
     @staticmethod
     def getWindowX():
-        return pygame.display.get_window_size()[0]
+        return pygame.display.get_surface().get_size()[0]
     
     @staticmethod
     def getWindowY():
-        return pygame.display.get_window_size()[1]
+        return pygame.display.get_surface().get_size()[1]
     

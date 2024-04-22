@@ -9,3 +9,4 @@ def newEvent():
 
 EVENT_NEWENEMY = newEvent()
 EVENT_NEWCOIN = newEvent()
+EVENT_SCENESTART = newEvent()

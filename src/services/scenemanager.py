@@ -13,3 +13,6 @@ class SceneManager:
     def onTick(self):
         self.currentScene.update()
         self.currentScene.display()
+        
+    def onClick(self, position: tuple[int, int]):
+        self.currentScene.onClick(position)

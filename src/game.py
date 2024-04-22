@@ -2,6 +2,7 @@ import pygame
 
 from src.services.scenemanager import SceneManager
 from src.utils.fontHelper import initFonts
+from src.utils.eventHelper import EVENT_SCENESTART
 
 """Game class defines global variables and game loop
 """
@@ -26,6 +27,11 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT or not Game.running:
                 self.endGame()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.sceneManager.onClick(event.pos)
+            if event.type == EVENT_SCENESTART:
+                print("Game started")
+                
                 
     def gameLoop(self):
         while Game.running:

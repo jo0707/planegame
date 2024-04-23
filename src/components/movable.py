@@ -1,7 +1,7 @@
 import pygame
 
 class Movable:
-    def __init__(self, x: int, y: int, speed: int, rect: pygame.Rect):
+    def __init__(self, speed: int, rect: pygame.Rect):
         self.speed = speed
         self.rect = rect
         

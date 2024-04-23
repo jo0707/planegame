@@ -22,7 +22,7 @@ class Game:
         pygame.mixer_music.play(-1)
         self.sceneManager = SceneManager(Game.screen)
         
-    def onEvents(self):
+    def onEvent(self):
         self.sceneManager.onKeyDown(pygame.key.get_pressed())
         for event in pygame.event.get():
             if event.type == pygame.QUIT or not Game.running:
@@ -34,7 +34,7 @@ class Game:
                 
     def gameLoop(self):
         while Game.running:
-            self.onEvents()
+            self.onEvent()
             self.sceneManager.onTick()
             pygame.display.flip()
             Game.clock.tick(FPS)

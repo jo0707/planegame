@@ -66,6 +66,7 @@ class GameScene(Scene):
         
         for coinSprite in self.coinSprites:
             if pygame.sprite.collide_rect(coinSprite, self.character):
+                pygame.mixer.Sound("assets/coin.wav").play()
                 self.coinSprites.remove(coinSprite)
                 self.sprites.remove(coinSprite)
                 self.character.player.coins = self.character.player.coins + 1

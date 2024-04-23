@@ -1,40 +1,42 @@
 import pygame
 import random
 
+from src.components.gameEntity import GameEntity
 from src.components.clickable import Clickable
 
-class Button(pygame.sprite.Sprite, Clickable):
-    def __init__(self, x: int, y: int, width: int, height: int, text: str, font: pygame.font.Font, textColor: tuple[int, int, int] = pygame.colordict.THECOLORS["white"], action=lambda: None) -> None:
-        pygame.sprite.Sprite.__init__(self)
-        
-        # import from assets
-        self.image = pygame.image.load("assets/button.png")
-        self.image = pygame.transform.scale(self.image, (width, height))
-        self.rect = self.image.get_rect(topleft=(x, y))
-        self.text = font.render(text, True, textColor)
-        # self.hoverText = font.render(text, True, hoverColor)
+class Button(GameEntity, Clickable):
+    def __init__(self, x: int, y: int, width: int, height: int, text: str, font: pygame.font.Font, textColor = pygame.colordict.THECOLORS["white"], textHoverColor = pygame.colordict.THECOLORS["slategray"], action=lambda: None) -> None:
+        GameEntity.__init__(self, "assets/button.png", x, y, width, height)
+        self.__text = text
+        self.font = font
+        self.textColor = textColor
+        self.textHoverColor = textHoverColor
         self.action = action
-        # self.hoverColor = hoverColor
-        self.hover = False
-        #put text in the middle of the button
-        self.textRect = self.text.get_rect(center=(width // 2, height // 2))
-        self.image.blit(self.text, self.textRect)
+        self.isHovered = False
+        self.textSurface = self.font.render(self.__text, True, textColor)
+        self.textRect = self.textSurface.get_rect(center=(width // 2, height // 2))
+        self.image.blit(self.textSurface, self.textRect)
         
-
     def update(self):
-        # if self.hover:
-        #     self.image.fill(self.hoverColor)
-        #     self.image.blit(self.hoverText, (0, 0))
-        # else:
-        #     self.image.fill(self.color)
-        #     self.image.blit(self.text, (0, 0))
-        pass
+        if self.getHoverState() != self.isHovered:
+            self.isHovered = not self.isHovered
+            self.hoverChange()
 
     def onClick(self):
         self.action()
+        
+    def setText(self, text: str):
+        self.__text = text
+        self.update()
 
-    def onHover(self):
-        self.hover = True
-
-    def onUnhover(self):
-        self.hover = False
+    def getHoverState(self):
+        return self.rect.collidepoint(pygame.mouse.get_pos())
+    
+    def hoverChange(self):
+        if self.isHovered:
+            self.image.fill((32, 32, 32), special_flags=pygame.BLEND_RGB_SUB)
+            self.textSurface = self.font.render(self.__text, True, self.textHoverColor)
+        else:
+            self.image.fill((32, 32, 32), special_flags=pygame.BLEND_RGB_ADD)
+            self.textSurface = self.font.render(self.__text, True, self.textColor)
+        self.image.blit(self.textSurface, self.textRect)

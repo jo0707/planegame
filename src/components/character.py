@@ -1,17 +1,15 @@
 import pygame
 
+from src.components.gameEntity import GameEntity
 from src.player import Player
 from src.components.movable import Movable
 
-class Character(pygame.sprite.Sprite, Movable):
+class Character(GameEntity, Movable):
     def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('assets/player.png')
-        self.image = pygame.transform.scale(self.image, (60,50))
-        self.rect = self.image.get_rect()
-        self.speed = 5
+        GameEntity.__init__(self, 'assets/player.png', 0, 0, 60, 50)
         self.player = Player.getPlayer()
-        Movable.__init__(self, 0, 0, 8, self.rect)
+        self.speed = 5
+        Movable.__init__(self, 8, self.rect)
         
     def update(self):
         self.player.distance = self.player.distance + 1

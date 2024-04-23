@@ -1,6 +1,5 @@
 import pygame
 import random
-import config
 from src.components.movable import Movable
 from src.utils.screenHelper import ScreenHelper
 
@@ -15,10 +14,9 @@ class Enemy(pygame.sprite.Sprite, Movable):
                 random.randint(0, pygame.display.get_window_size()[1]),
             )
         )
-        self.speed = 5
+        self.speed = 4
         Movable.__init__(self, ScreenHelper.getWindowX(), random.randint(0, ScreenHelper.getWindowY()), 5, self.rect)
         print("Enemy init")
         
     def update(self):
-        print("Enemy update")
         self.moveLeft()

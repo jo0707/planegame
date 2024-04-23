@@ -10,3 +10,9 @@ class Player():
         self.coins = 0
         self.distance = 0
         self.name = "Player"
+        
+    @staticmethod
+    def getPlayer():
+        return player
+        
+player = Player()

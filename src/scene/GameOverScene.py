@@ -6,7 +6,7 @@ from src.components.clickable import Clickable
 from src.scene.scene import Scene
 from src.utils.screenHelper import ScreenHelper
 from src.utils.fontHelper import fonts
-from utils.eventHelper import EVENT_SCENEGAME, EVENT_SCENESTART
+from src.utils.eventHelper import EVENT_SCENEGAME, EVENT_SCENESTART
 
 class GameOverScene(Scene):
     def __init__(self, screen: pygame.Surface):

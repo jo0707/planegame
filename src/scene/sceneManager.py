@@ -23,8 +23,6 @@ class SceneManager:
         self.currentScene.onKeyDown(keys)
         
     def onTick(self):
-        if self.currentScene.nextScene != None:
-            self.currentScene = self.currentScene.nextScene
         self.currentScene.update()
         self.currentScene.display()
         

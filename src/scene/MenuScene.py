@@ -6,6 +6,7 @@ from src.components.clickable import Clickable
 from src.scene.scene import Scene
 from src.utils.screenHelper import ScreenHelper
 from src.utils.fontHelper import fonts
+from src.utils.eventHelper import EVENT_SCENEGAME
 
 class MenuScene(Scene):
     def __init__(self, screen: pygame.Surface):
@@ -21,7 +22,7 @@ class MenuScene(Scene):
                 height=100,
                 text="Start",
                 font=fonts["pixel"],
-                action=lambda: self.switchSceneEvent(GameScene(self.screen))
+                action=lambda: self.switchSceneEvent(EVENT_SCENEGAME)
             )
         )
         self.sprites.add(

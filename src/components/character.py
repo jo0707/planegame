@@ -1,6 +1,7 @@
 from typing import Any
 import pygame
 
+from game import Game
 from src.components.movable import Movable
 
 class Character(pygame.sprite.Sprite, Movable):
@@ -10,8 +11,7 @@ class Character(pygame.sprite.Sprite, Movable):
         self.image = pygame.transform.scale(self.image, (60,50))
         self.rect = self.image.get_rect()
         self.speed = 8
-        self.coins = 0
-        self.distance = 0
+        self.player = Game.player
         Movable.__init__(self, 0, 0, 8, self.rect)
         
     def update(self):

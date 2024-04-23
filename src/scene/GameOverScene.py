@@ -6,6 +6,7 @@ from src.components.clickable import Clickable
 from src.scene.scene import Scene
 from src.utils.screenHelper import ScreenHelper
 from src.utils.fontHelper import fonts
+from utils.eventHelper import EVENT_SCENEGAME, EVENT_SCENESTART
 
 class GameOverScene(Scene):
     def __init__(self, screen: pygame.Surface):
@@ -13,27 +14,33 @@ class GameOverScene(Scene):
         self.background = pygame.image.load("assets/background.png")
         self.background = pygame.transform.scale(self.background, (pygame.display.get_window_size()))
         
+        yStart = ScreenHelper.getWindowY() // 2 - 50
         self.sprites.add(
-            Button(
+            [Button(
                 x=ScreenHelper.getWindowX() // 2 - 100,
-                y=ScreenHelper.getWindowY() // 2 - 50,
+                y=yStart,
+                width=200,
+                height=100,
+                text="Try Again",
+                font=fonts["pixel"],
+                action=lambda: self.switchSceneEvent(EVENT_SCENEGAME)
+            ),Button(
+                x=ScreenHelper.getWindowX() // 2 - 100,
+                y=yStart + 100,
                 width=200,
                 height=100,
                 text="Back to Menu",
                 font=fonts["pixel"],
-                action=lambda: self.switchToScene(MenuScene(self.screen))
-            )
-        )
-        self.sprites.add(
-            Button(
+                action=lambda: self.switchSceneEvent(EVENT_SCENESTART)
+            ),Button(
                 x=ScreenHelper.getWindowX() // 2 - 100,
-                y=ScreenHelper.getWindowY() // 2 + 100,
+                y=yStart + 200,
                 width=200,
                 height=100,
                 text="Quit",
                 font=fonts["pixel"],
                 action=lambda: pygame.event.post(pygame.event.Event(pygame.QUIT)),
-            )
+            )]
         )
     
     def onKeyDown(self, keys):

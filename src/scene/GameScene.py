@@ -1,15 +1,11 @@
 import pygame
 
-from src.scene.GameOverScene import GameOverScene
 from src.components.character import Character
 from src.components.coin import Coin
 from src.components.enemy import Enemy
-from src.components.button import Button
 from src.components.clickable import Clickable
 from src.scene.scene import Scene
-from src.utils.screenHelper import ScreenHelper
-from src.utils.fontHelper import fonts
-from src.utils.eventHelper import EVENT_NEWCOIN, EVENT_NEWENEMY
+from src.utils.eventHelper import EVENT_NEWCOIN, EVENT_NEWENEMY, EVENT_SCENEGAMEOVER
 
 class GameScene(Scene):
     def __init__(self, screen: pygame.Surface):
@@ -27,13 +23,13 @@ class GameScene(Scene):
         self.sprites.add(self.coinSprites)
     
     def onKeyDown(self, keys):
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.character.moveUp()
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.character.moveDown()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.character.moveLeft()
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.character.moveRight()
     
     def onEvent(self, event):
@@ -67,6 +63,4 @@ class GameScene(Scene):
                 self.character.coins = self.character.coins + 1
             
         if pygame.sprite.spritecollideany(self.character, self.enemySprites):
-            self.switchToScene(GameOverScene(self.screen))    
-            
-        
+            self.switchSceneEvent(EVENT_SCENEGAMEOVER)

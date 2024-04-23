@@ -12,4 +12,7 @@ def postEvent(event: int):
 
 EVENT_NEWENEMY = newEvent()
 EVENT_NEWCOIN = newEvent()
+
 EVENT_SCENESTART = newEvent()
+EVENT_SCENEGAME = newEvent()
+EVENT_SCENEGAMEOVER = newEvent()

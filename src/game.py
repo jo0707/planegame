@@ -1,5 +1,6 @@
 import pygame
 
+from src.player import Player
 from src.scene.sceneManager import SceneManager
 from src.utils.fontHelper import initFonts
 
@@ -12,10 +13,10 @@ class Game:
     FPS=144
     WINDOW_TITLE="Plane Game"
     
-    
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption(WINDOW_TITLE)
     clock = pygame.time.Clock()
+    player = Player()
     running = True
     
     def __init__(self):

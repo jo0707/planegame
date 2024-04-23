@@ -3,7 +3,6 @@ import pygame
 
 class Scene(ABC):
     def __init__(self, screen: pygame.Surface):
-        self.nextScene = None
         self.sprites = pygame.sprite.Group()
         self.screen = screen
         
@@ -27,5 +26,5 @@ class Scene(ABC):
     def update(self):
         pass
 
-    def switchToScene(self, nextScene):
-        self.nextScene = nextScene
+    def switchSceneEvent(self, nextSceneEvent: int):
+        pygame.event.post(pygame.event.Event(nextSceneEvent))

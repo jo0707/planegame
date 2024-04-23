@@ -21,7 +21,7 @@ class MenuScene(Scene):
                 height=100,
                 text="Start",
                 font=fonts["pixel"],
-                action=lambda: self.switchToScene(GameScene(self.screen))
+                action=lambda: self.switchSceneEvent(GameScene(self.screen))
             )
         )
         self.sprites.add(

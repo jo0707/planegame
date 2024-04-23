@@ -6,11 +6,16 @@ class SceneManager:
     def __init__(self, screen: pygame.Surface):
         self.screen = screen
         self.currentScene = MenuScene(screen)
-    
-    def GoToScene(self, scene): 
-        self.currentScene = scene
+        
+    def onEvent(self, event):
+        self.currentScene.onEvent(event)
+        
+    def onKeyDown(self, keys):
+        self.currentScene.onKeyDown(keys)
         
     def onTick(self):
+        if self.currentScene.nextScene != None:
+            self.currentScene = self.currentScene.nextScene
         self.currentScene.update()
         self.currentScene.display()
         

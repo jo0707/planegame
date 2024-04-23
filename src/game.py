@@ -1,8 +1,7 @@
 import pygame
 
-from src.services.scenemanager import SceneManager
+from src.scene.sceneManager import SceneManager
 from src.utils.fontHelper import initFonts
-from src.utils.eventHelper import EVENT_SCENESTART
 
 """Game class defines global variables and game loop
 """
@@ -12,6 +11,7 @@ class Game:
     SCREEN_HEIGHT=800
     FPS=144
     WINDOW_TITLE="Plane Game"
+    
     
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption(WINDOW_TITLE)
@@ -24,14 +24,14 @@ class Game:
         self.sceneManager = SceneManager(Game.screen)
         
     def onEvents(self):
+        self.sceneManager.onKeyDown(pygame.key.get_pressed())
         for event in pygame.event.get():
             if event.type == pygame.QUIT or not Game.running:
-                self.endGame()
+                self.quitGame()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.sceneManager.onClick(event.pos)
-            if event.type == EVENT_SCENESTART:
-                print("Game started")
-                
+            else:
+                self.sceneManager.onEvent(event.type)
                 
     def gameLoop(self):
         while Game.running:
@@ -40,5 +40,5 @@ class Game:
             pygame.display.flip()
             Game.clock.tick(Game.FPS)
 
-    def endGame(self):
+    def quitGame(self):
         pygame.quit()

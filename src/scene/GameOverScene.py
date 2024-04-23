@@ -1,13 +1,13 @@
 import pygame
 
-from src.scene.GameScene import GameScene
+from src.scene.MenuScene import MenuScene
 from src.components.button import Button
 from src.components.clickable import Clickable
 from src.scene.scene import Scene
 from src.utils.screenHelper import ScreenHelper
 from src.utils.fontHelper import fonts
 
-class MenuScene(Scene):
+class GameOverScene(Scene):
     def __init__(self, screen: pygame.Surface):
         super().__init__(screen)
         self.background = pygame.image.load("assets/background.png")
@@ -19,9 +19,9 @@ class MenuScene(Scene):
                 y=ScreenHelper.getWindowY() // 2 - 50,
                 width=200,
                 height=100,
-                text="Start",
+                text="Back to Menu",
                 font=fonts["pixel"],
-                action=lambda: self.switchToScene(GameScene(self.screen))
+                action=lambda: self.switchToScene(MenuScene(self.screen))
             )
         )
         self.sprites.add(

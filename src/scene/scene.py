@@ -6,9 +6,13 @@ class Scene(ABC):
         self.nextScene = None
         self.sprites = pygame.sprite.Group()
         self.screen = screen
+        
+    @abstractmethod
+    def onEvent(self, event):
+        pass
     
     @abstractmethod
-    def onKeyDown(self, key):
+    def onKeyDown(self, keys):
         pass
 
     @abstractmethod
@@ -23,5 +27,5 @@ class Scene(ABC):
     def update(self):
         pass
 
-    def SwitchToScene(self, nextScene):
+    def switchToScene(self, nextScene):
         self.nextScene = nextScene

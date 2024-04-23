@@ -6,17 +6,17 @@ from src.utils.screenHelper import ScreenHelper
 
 class Coin(pygame.sprite.Sprite, Movable):
     def __init__(self):
-        super().__init__()
-        self.surf = pygame.image.load('assets/coin.gif')
-        self.surf = pygame.transform.scale(self.surf, (60,60))
-        self.rect = self.surf.get_rect(
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('assets/coin.gif')
+        self.image = pygame.transform.scale(self.image, (60,60))
+        self.rect = self.image.get_rect(
             center=(
                 pygame.display.get_window_size()[0] + 20,
                 random.randint(0, pygame.display.get_window_size()[1]),
             )
         )
         self.speed = 5
-        Movable.__init__(self, ScreenHelper.getWindowX(), random.randrange(0, ScreenHelper.getWindowY()), 5, pygame.Rect(0, 0, 60, 60))
+        Movable.__init__(self, ScreenHelper.getWindowX(), random.randrange(0, ScreenHelper.getWindowY()), 5, self.rect)
         
-    def update(self) -> None:
+    def update(self):
         self.moveLeft()

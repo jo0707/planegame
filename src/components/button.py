@@ -22,12 +22,13 @@ class Button(pygame.sprite.Sprite, Clickable):
         
 
     def update(self):
-        if self.hover:
-            self.image.fill(self.hoverColor)
-            self.image.blit(self.hoverText, (0, 0))
-        else:
-            self.image.fill(self.color)
-            self.image.blit(self.text, (0, 0))
+        # if self.hover:
+        #     self.image.fill(self.hoverColor)
+        #     self.image.blit(self.hoverText, (0, 0))
+        # else:
+        #     self.image.fill(self.color)
+        #     self.image.blit(self.text, (0, 0))
+        pass
 
     def onClick(self):
         self.action()

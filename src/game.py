@@ -19,6 +19,7 @@ class Game:
         pygame.mixer.init()
         initFonts()
         pygame.mixer_music.load("assets/backsound.mp3")
+        pygame.mixer_music.set_volume(0.3)
         pygame.mixer_music.play(-1)
         self.sceneManager = SceneManager(Game.screen)
         

@@ -11,8 +11,8 @@ class Enemy(GameEntity, Movable):
             pygame.display.get_window_size()[0] + 20,
             random.randint(0, pygame.display.get_window_size()[1]),
         )        
-        self.speed = 4
-        Movable.__init__(self, 5, self.rect)
+        self.speed = 12
+        Movable.__init__(self, self.speed, self.rect)
         
     def update(self):
         self.moveLeft()

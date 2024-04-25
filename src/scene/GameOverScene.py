@@ -14,11 +14,11 @@ class GameOverScene(Scene):
         self.background = pygame.image.load("assets/background.png")
         self.background = pygame.transform.scale(self.background, (pygame.display.get_window_size()))
         
-        yStart = ScreenHelper.getWindowY() // 2 - 50
+        yCenter = (ScreenHelper.getWindowY() // 2)
         self.sprites.add(
             [Button(
                 x=ScreenHelper.getWindowX() // 2 - 100,
-                y=yStart,
+                y=yCenter - 120,
                 width=200,
                 height=100,
                 text="Try Again",
@@ -26,7 +26,7 @@ class GameOverScene(Scene):
                 action=lambda: self.switchSceneEvent(EVENT_SCENEGAME)
             ),Button(
                 x=ScreenHelper.getWindowX() // 2 - 100,
-                y=yStart + 100,
+                y=yCenter,
                 width=200,
                 height=100,
                 text="Back to Menu",
@@ -34,7 +34,7 @@ class GameOverScene(Scene):
                 action=lambda: self.switchSceneEvent(EVENT_SCENESTART)
             ),Button(
                 x=ScreenHelper.getWindowX() // 2 - 100,
-                y=yStart + 200,
+                y=yCenter + 120,
                 width=200,
                 height=100,
                 text="Quit",
